@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Project-local NVIDIA runtime used by CTranslate2/faster-whisper on Windows.
+nvidia-cuda-runtime-cu12>=12.4,<13
+nvidia-cublas-cu12>=12.4,<13
+nvidia-cudnn-cu12>=9,<10

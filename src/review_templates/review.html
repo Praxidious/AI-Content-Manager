@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="review-token" content="{{ token }}"><title>ContentBot · Editor's desk</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='review.css') }}">
+<script defer src="{{ url_for('static', filename='review.js') }}"></script></head>
+<body><header><div><span class="eyebrow">JUSTGLAD2BHERE / CONTENTBOT</span><h1>Editor's desk<span class="dot">.</span></h1></div>
+<div><a href="/analytics">Performance / Analytics →</a><div class="local">● Saved on this PC</div></div></header>
+<section class="summary" aria-label="Feedback summary"><div><span class="eyebrow">CLIPS REVIEWED</span><strong id="total">0</strong></div><div id="distribution"></div>
+<details><summary>What’s working / what isn’t</summary><div class="reason-summary"><div><h3>Positive reasons</h3><p id="positive-summary"></p></div><div><h3>Rejection reasons</h3><p id="negative-summary"></p></div></div></details></section>
+<nav><div>Top 20 unreviewed clips <button id="refresh">Refresh</button></div>
+<div><span id="position"></span> <button id="previous" aria-label="Previous candidate">← Previous</button> <button id="next" aria-label="Next candidate">Next →</button></div></nav>
+<p class="muted">Your top 20 unreviewed clips, strongest first. S and A tiers only, at least 10 seconds long. Saved ratings stay out of future queues.</p>
+<p id="error" role="alert"></p><div id="empty" hidden><h2>Your review queue is clear.</h2><p>No qualifying unreviewed clips remain in this set. Refresh for the next set, or process another VOD.</p></div>
+<main id="editor" hidden><section class="moment"><div class="player"><video id="video" controls preload="metadata"></video><div id="preview-placeholder"><span class="eyebrow">THE MOMENT</span><p>Load a rough preview from the source VOD.</p><button id="preview">Prepare preview</button><p id="preview-status" role="status"></p></div></div>
+<div class="moment-title"><div><span id="source" class="eyebrow"></span><h2 id="title"></h2></div><span class="tier" id="tier"></span></div>
+<p id="range" class="muted"></p><div class="scores" id="scores"></div><p id="preference" class="muted"></p><p id="audience" class="muted"></p><div id="tags" class="tags"></div><p id="detected"></p>
+<details open><summary>Transcript</summary><div id="transcript"></div></details><details><summary>Audio detection, features & clip identity</summary><p id="audio-reason"></p><div id="audio-events"></div><pre id="audio"></pre><code id="clip-id"></code></details></section>
+<aside><span class="eyebrow">YOUR CALL</span><h2>Would you post it?</h2><p class="muted">Rate the moment, then tell ContentBot why.</p>
+<div class="votes">{% for rating in ratings %}<button data-rating="{{ rating }}"><kbd>{{ loop.index }}</kbd>{{ rating.replace('_',' ').upper().replace('S TIER','S-TIER') }}</button>{% endfor %}</div>
+<p id="saved" role="status" aria-live="polite">Unrated</p>
+<fieldset><legend>What worked</legend>{% for reason in positive %}<label class="reason"><input type="checkbox" value="{{ reason }}">{{ reason }}</label>{% endfor %}</fieldset>
+<fieldset><legend>What missed</legend>{% for reason in negative %}<label class="reason"><input type="checkbox" value="{{ reason }}">{{ reason }}</label>{% endfor %}</fieldset>
+<label for="note">Anything else?</label><textarea id="note" maxlength="2000" rows="3" placeholder="Optional context for your rating…"></textarea>
+<button id="submit-feedback" type="button">Submit feedback</button>
+<p id="submit-status" role="status" aria-live="polite">Choose a rating, then submit to confirm your feedback is saved.</p>
+<p class="shortcut">1–5 rate · ← → navigate · Space plays/pauses<br>Reason tags save before or after a vote.</p></aside></main>
+<footer>Your taste, in your words. No model training. No uploads.</footer></body></html>

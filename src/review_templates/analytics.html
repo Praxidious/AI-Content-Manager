@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="review-token" content="{{ token }}"><title>ContentBot · Performance / Analytics</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='review.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='analytics.css') }}">
+<script defer src="{{ url_for('static', filename='analytics.js') }}"></script></head>
+<body><header><div><span class="eyebrow">CONTENTBOT / THE FEEDBACK LOOP</span><h1>Performance<span class="dot">.</span></h1>
+<p class="muted">Connect your taste with what your audience watches.</p></div><a href="/">← Editor’s desk</a></header>
+<nav aria-label="Analytics sections"><a href="#import">Import performance</a><a href="#dashboard">Platform insights</a><a href="#history">Post history</a></nav>
+<p id="status" role="status" aria-live="polite"></p><p id="error" role="alert"></p>
+<section class="panel" id="import"><span class="eyebrow">01 / POST & SNAPSHOT</span><h2>Bring in the results</h2>
+<form id="import-form">
+<label>Post<select id="post"><option value="">New post</option></select></label>
+<div class="form-grid" id="new-post-fields">
+<label>Find a clip<input id="clip-search" type="search" placeholder="Title, source or clip ID"></label>
+<label>Clip<select id="clip" required></select></label>
+<label>Platform<select id="platform" required></select></label>
+<label>Account / channel<input id="account" required value="default" maxlength="100"></label>
+<label>Posted at (your local time)<input id="posted-at" type="datetime-local" required step="1"></label>
+<label>Post URL or reference (optional)<input id="post-reference" maxlength="500"></label>
+</div>
+<p id="post-identity" class="muted"></p>
+<div class="form-grid"><label>Snapshot age<select id="capture-age"><option value="">Manual capture time</option><option value="1">1 hour</option><option value="6">6 hours</option><option value="24">24 hours</option><option value="72">72 hours</option><option value="168">7 days</option></select></label>
+<label>Analytics captured at (your local time)<input id="captured-at" type="datetime-local" required step="1"></label></div>
+<details id="attributes"><summary>Posted edit characteristics (optional)</summary><p class="muted">Add known details about the actual edit. Blank fields use existing clip features where available. Unknown characteristics stay unknown.</p>
+<div class="form-grid">
+<label>Posted duration (seconds)<input data-feature="duration" type="number" min="0.01" step="any"></label>
+<label>Hook timing (seconds from start)<input data-feature="hook_timing" type="number" min="0" step="any"></label>
+<label>Payoff timing (seconds from start)<input data-feature="payoff_timing" type="number" min="0" step="any"></label>
+<label>Category<input data-feature="category" maxlength="200"></label><label>Game<input data-feature="game" maxlength="200"></label>
+<label>Editing style<input data-feature="editing_style" maxlength="200" placeholder="e.g. captions, fast cuts"></label>
+<label>Reaction intensity (0–10)<input data-feature="reaction_intensity" type="number" min="0" max="10" step="any"></label>
+<label>Number of speakers<input data-feature="speaker_count" type="number" min="0" step="1"></label>
+<label>Laughter<select data-feature="laughter"><option value="">Use detected feature / unknown</option><option value="true">Present</option><option value="false">Absent</option></select></label>
+<label>Emotion<input data-feature="emotion" maxlength="200"></label><label>Gameplay event<input data-feature="gameplay_event" maxlength="200"></label></div></details>
+<label>Screenshots (1–6, PNG / JPEG / WebP, up to 5 MB each)<input id="screenshots" type="file" accept="image/png,image/jpeg,image/webp" multiple></label>
+<p class="muted">Extraction sends selected screenshots to your configured {{ provider }} provider using {{ vision_model }}. Check that all images describe this post at the same capture time. Imports remain unsaved until you confirm.</p>
+<div class="actions"><button id="extract" type="submit">Extract & review</button><button id="manual" type="button">Enter metrics manually</button></div>
+</form>
+<section id="confirmation" hidden><span class="eyebrow">02 / REVIEW BEFORE SAVING</span><h2>Confirm recognized values</h2>
+<p>Review every value, unit, screenshot reference, and the post and dates above. Remove duplicate or incorrect rows. Percent values use 12.5 for 12.5%; watch times use seconds.</p>
+<ul id="warnings"></ul><div id="screenshots-preview"></div>
+<div class="table-scroll"><table id="metrics"><thead><tr><th>Metric key / platform label</th><th>Value</th><th>Unit</th><th>Original text / evidence</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+<datalist id="metric-keys"></datalist><button id="add-metric" type="button">+ Add metric</button>
+<h3>Calculated metrics</h3><p class="muted">Calculated separately; missing inputs are never treated as zero.</p><button id="derive" type="button">Preview calculations</button><div id="derived-preview"></div>
+<label class="confirm-check"><input id="confirmed" type="checkbox">I checked the post, dates and metrics.</label>
+<div class="actions"><button id="save" type="button">Confirm & save snapshot</button><button id="discard" type="button">Discard import</button></div></section></section>
+<section class="panel" id="dashboard"><span class="eyebrow">03 / PLATFORM INSIGHTS</span><h2>What performs better?</h2>
+<div class="form-grid"><label>Platform<select id="dash-platform"></select></label><label>Account / channel<input id="dash-account" value="default" maxlength="100"></label>
+<label>Compare at age (hours)<input id="dash-age" type="number" min="0.01" max="87600" step="any" value="24" list="ages"></label><datalist id="ages"><option value="1"><option value="6"><option value="24"><option value="72"><option value="168"></datalist>
+<label>Outcome metric<input id="dash-metric" value="views" list="metric-keys"></label></div><button id="refresh-dashboard">Update insights</button>
+<p id="method" class="muted"></p><div id="dashboard-summary" class="summary"></div>
+<p class="muted">A positive lift means above that post’s recent account baseline; negative means below. +1 log₂ lift is about 2× baseline. View count alone is not a verdict. Explore watch time, completion, shares and saves too. These are associations, not proof of cause.</p>
+<div class="table-scroll"><table><thead><tr><th>Characteristic</th><th>Group</th><th>Independent clips</th><th>Mean log₂ lift</th><th>Approx. 95% interval</th><th>Evidence</th></tr></thead><tbody id="associations"></tbody></table></div>
+<p id="coverage" class="muted"></p><h3>Posts against their own recent baseline</h3><div class="table-scroll"><table><thead><tr><th>Clip</th><th>Captured age</th><th>Value</th><th>Recent median</th><th>Baseline clips</th><th>Percentile</th></tr></thead><tbody id="observations"></tbody></table></div>
+</section>
+<section class="panel" id="history"><span class="eyebrow">04 / TRACK THE POST</span><h2>Snapshots & learning evidence</h2>
+<label>Saved post<select id="history-post"><option value="">Select a post</option></select></label><div id="post-history"></div><div id="prediction"></div>
+</section><footer>Audience predictions stay separate from Wes preference scores. No automatic retraining. Ranking influence is off by default, requires meaningful history, and is capped at ±0.5 points when enabled.</footer></body></html>

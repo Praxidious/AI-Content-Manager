@@ -1,0 +1,47 @@
+{
+  "whisper": {
+    "model": "large-v3",
+    "device": "auto",
+    "compute_type": "float16",
+    "cpu_compute_type": "int8",
+    "language": null,
+    "beam_size": 5,
+    "vad_filter": true,
+    "word_timestamps": false
+  },
+  "audio": {
+    "sample_rate": 16000,
+    "codec": "pcm_s16le",
+    "analysis_enabled": true,
+    "analysis_window_seconds": 2.0,
+    "analysis_hop_seconds": 1.0,
+    "baseline_seconds": 60.0,
+    "notable_signal_threshold": 6.5
+  },
+  "analysis": {
+    "provider": "ollama",
+    "model": "qwen3:8b",
+    "api_key_env": "OPENAI_API_KEY",
+    "base_url_env": "OPENAI_BASE_URL",
+    "ollama_url": "http://127.0.0.1:11434",
+    "ollama_context_tokens": 10240,
+    "ollama_max_output_tokens": 2048,
+    "chunk_minutes": 20,
+    "chunk_overlap_minutes": 2,
+    "max_chunk_characters": 24000,
+    "minimum_score": 7.0,
+    "minimum_clip_duration_seconds": 8.0,
+    "maximum_clip_duration_seconds": 45.0,
+    "context_expansion_seconds": 30.0,
+    "must_review_entertainment": 8.3,
+    "must_review_clipability": 7.5,
+    "good_content_entertainment": 6.5,
+    "human_review_min_score": 5.5,
+    "include_weak_suggestions": false,
+    "include_stream_moments": false,
+    "maximum_clips": 12,
+    "temperature": 0.2,
+    "request_timeout_seconds": 600,
+    "max_retries": 3
+  }
+}

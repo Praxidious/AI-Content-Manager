@@ -1,0 +1,212 @@
+{
+  "metrics": [
+    {
+      "key": "views",
+      "label": "Video views",
+      "value": 12345,
+      "unit": "count",
+      "displayed_text": "12,345",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "total_watch_time",
+      "label": "Total play time",
+      "value": 90605.0,
+      "unit": "seconds",
+      "displayed_text": "25h 10m 5s",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "average_watch_time",
+      "label": "Average watch time",
+      "value": 12.5,
+      "unit": "seconds",
+      "displayed_text": "12.5s",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "completion_rate",
+      "label": "Watched full video",
+      "value": 38.2,
+      "unit": "percent",
+      "displayed_text": "38.2%",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "follows_gained",
+      "label": "New followers",
+      "value": 42,
+      "unit": "count",
+      "displayed_text": "42",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "likes",
+      "label": "Likes",
+      "value": 850,
+      "unit": "count",
+      "displayed_text": "850",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "comments",
+      "label": "Comments",
+      "value": 63,
+      "unit": "count",
+      "displayed_text": "63",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "shares",
+      "label": "Shares",
+      "value": 120,
+      "unit": "count",
+      "displayed_text": "120",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    },
+    {
+      "key": "saves",
+      "label": "Saves",
+      "value": 77,
+      "unit": "count",
+      "displayed_text": "77",
+      "confidence": 1.0,
+      "sources": [
+        1
+      ]
+    }
+  ],
+  "original_response": {
+    "metrics": [
+      {
+        "key": "views",
+        "label": "Video views",
+        "value": 12345,
+        "unit": "count",
+        "displayed_text": "12,345",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "total_watch_time",
+        "label": "Total play time",
+        "value": 87005,
+        "unit": "seconds",
+        "displayed_text": "25h 10m 5s",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "average_watch_time",
+        "label": "Average watch time",
+        "value": 12.5,
+        "unit": "seconds",
+        "displayed_text": "12.5s",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "completion_rate",
+        "label": "Watched full video",
+        "value": 38.2,
+        "unit": "percent",
+        "displayed_text": "38.2%",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "follows_gained",
+        "label": "New followers",
+        "value": 42,
+        "unit": "count",
+        "displayed_text": "42",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "likes",
+        "label": "Likes",
+        "value": 850,
+        "unit": "count",
+        "displayed_text": "850",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "comments",
+        "label": "Comments",
+        "value": 63,
+        "unit": "count",
+        "displayed_text": "63",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "shares",
+        "label": "Shares",
+        "value": 120,
+        "unit": "count",
+        "displayed_text": "120",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      },
+      {
+        "key": "saves",
+        "label": "Saves",
+        "value": 77,
+        "unit": "count",
+        "displayed_text": "77",
+        "confidence": 1.0,
+        "sources": [
+          1
+        ]
+      }
+    ],
+    "warnings": []
+  },
+  "warnings": [
+    "total_watch_time: converted displayed duration to 90605 seconds. Verify the original text."
+  ],
+  "provider": "ollama",
+  "model": "qwen3-vl:4b-instruct"
+}

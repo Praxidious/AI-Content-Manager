@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
+logs/*
+!logs/.gitkeep
+tools/ffmpeg/bin/*
+!tools/ffmpeg/bin/.gitkeep
+tools/models/
